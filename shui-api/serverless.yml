@@ -22,6 +22,12 @@ functions:
       - httpApi:
           path: /notes
           method: get
+  GetNote:
+    handler: functions/GetNote/index.handler
+    events:
+      - httpApi:
+          path: /notes/{noteID}
+          method: get
   AddUser:
     handler: functions/AddUser/index.createUser
     events:
