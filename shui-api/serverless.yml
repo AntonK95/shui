@@ -28,6 +28,12 @@ functions:
       - httpApi:
           path: /user
           method: post
+  PostNote:
+    handler: functions/PostNote/index.handler
+    events:
+      - httpApi:
+          path: /note
+          method: post
 
 
 resources:
