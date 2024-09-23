@@ -34,6 +34,12 @@ functions:
       - httpApi:
           path: /note
           method: post
+  DeleteNote:
+    handler: functions/DeleteNote/index.handler
+    events:
+      - httpApi:
+          path: /notes/{noteID}
+          method: delete
 
 
 resources:
