@@ -40,6 +40,12 @@ functions:
       - httpApi:
           path: /notes/{noteID}
           method: delete
+  UpdateNote:
+    handler: functions/UpdateNote/index.handler
+    events:
+      - httpApi:
+          path: /notes/{noteID}
+          method: put
 
 
 resources:
