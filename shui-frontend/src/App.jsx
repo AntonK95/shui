@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import NotesPage from '../pages/notesPage/notesPage';
 import AddNotePage from '../pages/AddNotePage/AddNotePage';
+import Layout from '../components/layout/Layout';
 
 
 
@@ -18,10 +19,12 @@ function App() {
   // }, []);
 
   return (
-    <Routes>
-      <Route path='/' element={<NotesPage />}/>
-      <Route path='/note/add' element={<AddNotePage />}/>
-    </Routes> 
+    <Layout>
+      <Routes>
+        <Route path='/' element={<NotesPage />}/>
+        <Route path='/note/add' element={<AddNotePage />}/>
+      </Routes> 
+    </Layout>
   )
 }
 
