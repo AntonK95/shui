@@ -1,7 +1,8 @@
 // import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import NoteCard from "../../components/noteCard/NoteCard";
-import NoNotesPage from '../../pages/NoNotesPage/NoNotesPage'
+import NoNotesPage from '../../pages/NoNotesPage/NoNotesPage';
+import FloatingBtn from '../../components/floatingBtn/FloatingBtn';
 import './notespage.css';
 import axios from "axios";
 
@@ -28,6 +29,7 @@ function NotesPage() {
 
     
     return (
+        
         <div className='notesPage'>
             <section className="noteSection">
             { notes.length > 0 ? (
@@ -39,6 +41,7 @@ function NotesPage() {
                     <NoNotesPage />
             )}
         </section>
+            <FloatingBtn />
         </div>
     )
 }
