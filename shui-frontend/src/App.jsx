@@ -22,7 +22,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path='/' element={<NotesPage />}/>
-        <Route path='/note/add' element={<AddNotePage />}/>
+        <Route path='/addnotepage' element={<AddNotePage />}/>
       </Routes> 
     </Layout>
   )
