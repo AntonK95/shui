@@ -26,7 +26,16 @@ function NotesPage() {
 
     }, []);
 
-
+    const handleUpdate = (noteID, updatedText) => {
+        setNotes(prevNotes => // Uppdatera state med tidigare anteckningar
+            prevNotes.map(note => 
+                note.noteID === noteID ? {
+                    ...note,
+                    textContent : updatedText
+                } : note // Om noteID matchar, uppdatera textContent, annars behåll som den är
+            )
+        )
+    }
     
     return (
         
@@ -34,7 +43,11 @@ function NotesPage() {
             <section className="noteSection">
             { notes.length > 0 ? (
                 notes.map(note => (
-                    <NoteCard key={note.noteID} note={note} />
+                    <NoteCard 
+                    key={ note.noteID } 
+                    note={ note } 
+                    onUpdate={ handleUpdate }
+                    />
                 )
                     
                 ) ) : (
