@@ -46,12 +46,12 @@ export const createUser = async (event) => {
             TableName: "users-db",
             Item: newUser,
         });
-        console.log("User successfully added to DB"); // Logg vid lyckad inläggning
+        console.log("User successfully added to Database"); // Vid lyckad inläggning
 
         return sendResponse(200, `Grattis ${newUser.username} skapad!`, newUser); // Returmeddelande
 
     } catch (error) {
-        console.error("Error creating user:", error); // Loggar det fångade felet
-        return sendError(500, error.message); // Returnera ett felmeddelande
+        console.error("Error creating user:", error); 
+        return sendError(500, error.message); 
     }
 };

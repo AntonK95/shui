@@ -4,35 +4,33 @@ import db from "../../services/db.js";
 
 export const handler = async (event) => {
     try {
-        const { note } = JSON.parse(event.body);
-        if(!note) {
-            return sendError(400, { success : false}, 'No note found' );
-        }
-        if(!note.textContent ) {
+        const { textContent, username } = JSON.parse(event.body);
+        // Validerar de fält som skickas från frontend
+        if(!textContent ) {
             return sendError(400, { success : false }, 'No textContent found' );
         }
-        if(!note.username) {
+        if(!username) {
             return sendError(400, { success : false }, 'Must fill username field' );
         }
-        
+        // Ett försök till att koppla en users-db för att endast registrerade användare skall kunna skicka in en post
         // Kolla om användaren finns i users-db
-        const checkUser = await db.query({
-            TableName : 'users-db',
-            IndexName : 'UsernameIndex', // avnänder GSI igen
-            KeyConditionExpression : 'username = :username',
-            ExpressionAttributeValues : { ':username': note.username }
-        });
-        console.log("Result of user check:", checkUser);
-        console.log("TableName:", 'users-db');
-        console.log("IndexName:", 'UsernameIndex');
+        // const checkUser = await db.query({
+        //     TableName : 'users-db',
+        //     IndexName : 'UsernameIndex', // avnänder GSI igen
+        //     KeyConditionExpression : 'username = :username',
+        //     ExpressionAttributeValues : { ':username': note.username }
+        // });
+        // console.log("Result of user check:", checkUser);
+        // console.log("TableName:", 'users-db');
+        // console.log("IndexName:", 'UsernameIndex');
 
 
-        if(checkUser.Items.length === 0) {
-            return sendError(404, { success : false, message : `No user with username ${note.username} found. Only registered users can post notes.` })
-        }
+        // if(checkUser.Items.length === 0) {
+        //     return sendError(404, { success : false, message : `No user with username ${note.username} found. Only registered users can post notes.` })
+        // }
 
         // Hämta userID från den användare som returneras
-        const userID = checkUser.Items[0].userID;
+        // const userID = checkUser.Items[0].userID;
 
         // Formatera date så det stämmer med figma skiss
         const dateFormat = {
@@ -51,9 +49,8 @@ export const handler = async (event) => {
         const newNote = {
             noteID : uuid().substring(0, 8),
             date: formattedDate, // det formaterade datumet
-            textContent : note.textContent,
-            username : note.username,
-            userID : userID,
+            textContent : textContent,
+            username : username,
         }
 			// const id = uuid().substring(0, 6);
 
