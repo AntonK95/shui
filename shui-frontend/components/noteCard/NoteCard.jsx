@@ -2,7 +2,7 @@ import './notecard.css';
 import { useState } from 'react';
 import axios from 'axios';
 
-const NoteCard = ({ note, onUpdate }) => {
+const NoteCard = ({ note, onUpdate, onDelete }) => {
 
     const [ isEditing, setIsEditing ] = useState(false); // Om vi redigerar
     const [ updatedText, setUpdatedText ] = useState(note.textContent); // Håller den nya texten
@@ -36,6 +36,25 @@ const NoteCard = ({ note, onUpdate }) => {
         setUpdatedText(note.textContent);
     }
 
+    const deleteNote = async () => {
+        const noteID = note.noteID;
+      
+        try {
+          console.log(`Delete note with id ${noteID}`); // Kolla id för den note som skall tas bort
+          const response = await axios.delete(`https://r2n0yrekwc.execute-api.eu-north-1.amazonaws.com/notes/${noteID}`);
+      
+          if (response.status === 200) { 
+            console.log("Note deleted successfully");
+            onDelete(noteID);  // Uppdatera state 
+          } else {
+            console.log('Error: Note not deleted successfully', response);
+          }
+        } catch (error) {
+          console.log('Error deleting note', error);
+        }
+      };
+      
+
     return (
 
         <article className="noteCard"> {/* Representerar en anteckning */}
@@ -46,20 +65,20 @@ const NoteCard = ({ note, onUpdate }) => {
                         className='noteCard-btn' 
                         onClick={handleUpdate}>
                             <i 
-                            class="fa fa-check-square-o" 
+                            className="fa fa-check-square-o" 
                             aria-label='save edit'>
                             </i>
-                            </button> 
+                        </button> 
                         <button 
                         className='noteCard-btn' 
                         onClick={ cancelEdit }>
                             <i 
-                            class="fa fa-close" 
+                            className="fa fa-close" 
                             aria-label='cancel edit'>
                             </i>
                         </button> 
                     </div>
-                    <input 
+                    <textarea className='noteCard-text'
                         type="text" 
                         value={updatedText} // Visar den uppdaterade texten i inputfältet
                         onChange={(e) => setUpdatedText(e.target.value)} // Uppdaterar updatedText state när användaren skriver i fältet
@@ -69,11 +88,21 @@ const NoteCard = ({ note, onUpdate }) => {
                 <>  
                 <div className='noteCard-icons'>
                     <button 
-                    className='noteCard-btn' 
-                    onClick={handleEdit}>
+                        className='noteCard-btn' 
+                        onClick={handleEdit}>
                         <i 
-                        className="fa fa-pencil-square-o">
+                        className="fa fa-pencil-square-o"
+                        aria-label='edit note'>
                         </i>
+                    </button>
+                    <button 
+                            className='noteCard-btn'
+                            onClick={ deleteNote }
+                    >
+                    <i 
+                        className="fa fa-trash-o"
+                        aria-label='delete note'>
+                    </i>
                     </button> 
                 </div>
                 <p className='textContent'>{note.textContent}</p> 
