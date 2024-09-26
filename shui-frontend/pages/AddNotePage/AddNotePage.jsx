@@ -68,7 +68,7 @@ function AddNotePage() {
         <form className='add-note-form' onSubmit={ postNote }>
             <div className="input-wrapper noteCard">
                 {/* Inputfält för anteckning */}
-                <input
+                <textarea
                     className="input-text"
                     id="note"
                     onChange={(event => setNewNote(event.target.value))}  // Uppdatera state med anteckning
@@ -90,9 +90,7 @@ function AddNotePage() {
                 />
                 <label className="label" htmlFor="username">Användarnamn</label>
             </div>
-            {/* Felmeddelande visas om något går fel */}
-            {/* {errorMsg && <p className="error">{errorMsg}</p>} */}
-            {/* {console.log(errorMsg)} */}
+        
 
             <button className='publish-btn' type="submit">Publicera</button>
         </form>

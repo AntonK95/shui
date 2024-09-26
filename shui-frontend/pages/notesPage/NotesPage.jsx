@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+
 import { useState, useEffect } from 'react';
 import NoteCard from "../../components/noteCard/NoteCard";
 import NoNotesPage from '../../pages/NoNotesPage/NoNotesPage';
@@ -36,7 +36,13 @@ function NotesPage() {
             )
         )
     }
+
+    const deleteNote = (noteID) => {
+        console.log(`Deleting note with noteID ${noteID}`)
+        setNotes((prevNotes) => prevNotes.filter(note => note.noteID !== noteID));
+    };
     
+    console.log(notes);
     return (
         
         <div className='notesPage'>
@@ -47,6 +53,7 @@ function NotesPage() {
                     key={ note.noteID } 
                     note={ note } 
                     onUpdate={ handleUpdate }
+                    onDelete={ deleteNote }
                     />
                 )
                     
