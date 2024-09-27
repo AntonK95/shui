@@ -1,5 +1,6 @@
 
 .floating-btn {
+    position: absolute;
     background-image: url(/img/add-btn.png);
     width: 72px;
     height: 72px;

@@ -1,0 +1,17 @@
+
+
+.noNotes-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 700px;
+}
+
+.noNotes-section h1 {
+    color: white;
+    font-size: 32px;
+    font-family: "PT sans", sans-serif;
+    font-weight: bold;
+    padding: 2rem;
+}
