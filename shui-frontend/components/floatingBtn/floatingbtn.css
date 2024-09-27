@@ -1,0 +1,11 @@
+
+.floating-btn {
+    background-image: url(/img/add-btn.png);
+    width: 72px;
+    height: 72px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+    cursor: pointer;
+}

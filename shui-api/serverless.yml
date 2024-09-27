@@ -22,6 +22,48 @@ functions:
       - httpApi:
           path: /notes
           method: get
+  GetNote:
+    handler: functions/GetNote/index.handler
+    events:
+      - httpApi:
+          path: /notes/{noteID}
+          method: get
+  AddUser:
+    handler: functions/AddUser/index.createUser
+    events:
+      - httpApi:
+          path: /user
+          method: post
+  GetUser:
+    handler: functions/GetUser/index.handler
+    events:
+      - httpApi:
+          path: /user/{username}
+          method: get
+  GetUsers:
+    handler: functions/GetUsers/index.handler
+    events:
+      - httpApi:
+          path: /users
+          method: get
+  PostNote:
+    handler: functions/PostNote/index.handler
+    events:
+      - httpApi:
+          path: /note
+          method: post
+  DeleteNote:
+    handler: functions/DeleteNote/index.handler
+    events:
+      - httpApi:
+          path: /notes/{noteID}
+          method: delete
+  UpdateNote:
+    handler: functions/UpdateNote/index.handler
+    events:
+      - httpApi:
+          path: /notes/{noteID}
+          method: put
 
 
 resources:
@@ -44,7 +86,16 @@ resources:
         AttributeDefinitions:
           - AttributeName: 'userID' 
             AttributeType: 'S'
+          - AttributeName: 'username' # username som attribut för GSI
+            AttributeType: 'S'
         KeySchema:
           - AttributeName: 'userID' 
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+        GlobalSecondaryIndexes:  # Definiera GSI här
+          - IndexName: 'UsernameIndex'
+            KeySchema:
+              - AttributeName: 'username'  # Använd username som partition key
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'  # Inkludera alla attribut i indexet
