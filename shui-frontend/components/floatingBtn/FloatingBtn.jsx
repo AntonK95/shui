@@ -57,7 +57,7 @@ const FloatingBtn = () => {
     return (
         <div className='floating-btn-func'
         style={{
-            position: 'absolute',
+            position: dragging ? 'absolute' : 'absolute',
             top: `${position.top}px`,
             left: `${position.left}px`,
             cursor: dragging ? 'grabbing' : 'grab'
