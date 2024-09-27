@@ -18,19 +18,13 @@ body {
 
 .input-text {
     width: 100%;
-    height: 100%;
+    height: 435px;
     resize: none;
     padding: 10px;
     font-size: 16px;
     font-family: "PT sans", sans-serif;
     box-sizing: border-box;
-}
-
-.input-text:focus {
-    border: none;
-}
-
-.input-text:active {
+    outline: none;
     border: none;
 }
 
