@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './addnotepage.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function AddNotePage() {
@@ -8,6 +9,8 @@ function AddNotePage() {
     const [ newNote, setNewNote ] = useState('');
     const [ username, setUsername ] = useState('');
     const [ errorMsg, setErrorMsg ] = useState('');
+
+    const navigate = useNavigate();
 
     // Ett försök till att koppla en users-db för att endast registrerade användare skall kunna skicka in en post
     // Kolla om användaren som skriver en post finns i databasen innan post anrop
@@ -26,13 +29,13 @@ function AddNotePage() {
 
         if(username.trim() === '') {
             setErrorMsg('Username can not be empty');
-            // return;
+            return;
         }
 
         if(newNote.trim() === '') {
             setErrorMsg('Text field can not be empty!');
             console.log('Text field can not be empty!');
-            // return;
+            return;
         };
 
         // const userExists = await lookForUsername();
@@ -56,6 +59,7 @@ function AddNotePage() {
                 setNewNote('');
                 setUsername('');
                 setErrorMsg('');
+                navigate('/');
             }
 
         } catch (error) {
